@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4a101b">
+  <meta name="description" content="Discover wines, spirits, whiskey, bourbon, tequila, and craft beer at Jonna's Fine Wine & Liquor in Farmington Hills, Michigan. Visit us on Halsted Road.">
+  <meta property="og:title" content="Jonna's Fine Wine & Liquor | Farmington Hills, MI">
+  <meta property="og:description" content="A neighborhood destination for fine wine, spirits, whiskey, bourbon, tequila, and beer.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:,">
+  <title>Jonna's Fine Wine &amp; Liquor | Farmington Hills, MI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --burgundy: #4a101b;
+      --burgundy-dark: #300b12;
+      --gold: #d7b56d;
+      --gold-light: #f3ead7;
+      --ink: #1d1b19;
+      --muted: #716b65;
+      --paper: #fbf9f5;
+      --white: #fff;
+      --line: #e9e3da;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+      --shadow: 0 18px 50px rgba(37, 22, 16, .09);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.modal-open { overflow: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font: inherit; }
+    :focus-visible { outline: 3px solid #b98522; outline-offset: 4px; }
+    .skip-link {
+      position: fixed;
+      z-index: 2000;
+      top: 12px;
+      left: 12px;
+      padding: 10px 16px;
+      transform: translateY(-160%);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--burgundy);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--burgundy);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 44px;
+      text-align: center;
+    }
+    .section-heading h2 {
+      margin: 0;
+      color: var(--burgundy);
+      font: 600 clamp(2.1rem, 4vw, 3.2rem)/1.15 var(--serif);
+      letter-spacing: -.025em;
+    }
+    .section-heading p:last-child {
+      margin: 15px 0 0;
+      color: var(--muted);
+    }
+    .utility-bar {
+      padding: 9px 20px;
+      background: var(--burgundy-dark);
+      color: #fff;
+      text-align: center;
+      font-size: .8rem;
+      letter-spacing: .025em;
+    }
+    .utility-bar a { color: #f1d89e; text-decoration: none; }
+    .utility-bar a:hover { text-decoration: underline; }
+    .navbar {
+      position: sticky;
+      z-index: 100;
+      top: 0;
+      border-bottom: 1px solid rgba(29, 27, 25, .08);
+      background: rgba(255, 255, 255, .97);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      min-height: 82px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--burgundy);
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--burgundy);
+      font: 600 1.25rem var(--serif);
+    }
+    .brand-name {
+      font: 600 1.04rem/1.1 var(--serif);
+      letter-spacing: -.015em;
+    }
+    .brand-caption {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font: 600 .58rem/1 var(--sans);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.4vw, 32px);
+    }
+    .nav-links a {
+      color: #393532;
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--burgundy); }
+    .nav-links .nav-visit {
+      padding: 11px 18px;
+      border: 1px solid var(--burgundy);
+      border-radius: 3px;
+      color: var(--burgundy);
+    }
+    .nav-links .nav-visit:hover { background: var(--burgundy); color: var(--white); }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--white);
+      color: var(--burgundy);
+      cursor: pointer;
+    }
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: min(760px, 86svh);
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(20, 10, 9, .8) 0%, rgba(20, 10, 9, .56) 48%, rgba(20, 10, 9, .12) 100%),
+        url("https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=2200&q=85") center 52% / cover;
+      color: var(--white);
+    }
+    .hero::after {
+      position: absolute;
+      right: -120px;
+      bottom: -250px;
+      width: 560px;
+      height: 560px;
+      border: 1px solid rgba(243, 234, 215, .28);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+      padding-block: 100px;
+    }
+    .hero .eyebrow { color: #e8cc8d; }
+    .hero h1 {
+      max-width: 760px;
+      margin: 0;
+      font: 600 clamp(2.9rem, 6.7vw, 5.7rem)/1.04 var(--serif);
+      letter-spacing: -.035em;
+    }
+    .hero-copy {
+      max-width: 555px;
+      margin: 24px 0 32px;
+      color: rgba(255, 255, 255, .88);
+      font-size: clamp(1rem, 1.5vw, 1.16rem);
+    }
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 23px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      font-size: .88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-gold { background: var(--gold); color: #22170a; }
+    .button-gold:hover { background: #e4c985; }
+    .button-outline { border-color: rgba(255, 255, 255, .72); color: var(--white); }
+    .button-outline:hover { background: var(--white); color: var(--burgundy); }
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 34px;
+      color: rgba(255, 255, 255, .86);
+      font-size: .84rem;
+    }
+    .hero-note strong { color: #f2d896; font-size: 1.05rem; letter-spacing: .08em; }
+    .section { padding: clamp(72px, 9vw, 112px) 0; }
+    .categories-section { background: var(--white); }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .category-card {
+      position: relative;
+      display: flex;
+      min-height: 260px;
+      align-items: flex-end;
+      overflow: hidden;
+      border-radius: 4px;
+      background-color: #3a2825;
+      background-image: linear-gradient(0deg, rgba(20, 12, 10, .82), rgba(20, 12, 10, .04) 78%), var(--card-image);
+      background-position: center;
+      background-size: cover;
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(33, 22, 18, .1);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .category-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .category-card::after {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, .18);
+      content: "";
+      pointer-events: none;
+    }
+    .category-copy { position: relative; z-index: 1; padding: 25px; }
+    .category-copy span {
+      display: block;
+      color: #ead29a;
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .category-copy h3 { margin: 5px 0 0; font: 600 1.8rem/1.2 var(--serif); }
+    .weekly {
+      position: relative;
+      overflow: hidden;
+      background: var(--burgundy);
+      color: var(--white);
+    }
+    .weekly::before, .weekly::after {
+      position: absolute;
+      width: 390px;
+      height: 390px;
+      border: 1px solid rgba(243, 234, 215, .14);
+      border-radius: 50%;
+      content: "";
+    }
+    .weekly::before { top: -270px; left: -100px; }
+    .weekly::after { right: -180px; bottom: -310px; width: 520px; height: 520px; }
+    .weekly-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 36px;
+      padding-block: 60px;
+    }
+    .weekly .eyebrow { color: #e8cc8d; }
+    .weekly h2 { max-width: 620px; margin: 0; font: 600 clamp(2rem, 4vw, 3.1rem)/1.14 var(--serif); }
+    .weekly p:not(.eyebrow) { max-width: 590px; margin: 14px 0 0; color: rgba(255, 255, 255, .78); }
+    .weekly .button { flex: 0 0 auto; }
+    .video-section { background: var(--paper); }
+    .video-panel {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .video-copy { padding-right: 12px; }
+    .video-copy h2 {
+      margin: 0 0 14px;
+      color: var(--burgundy);
+      font: 600 clamp(2.1rem, 4vw, 3.1rem)/1.12 var(--serif);
+      letter-spacing: -.025em;
+    }
+    .video-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+    .video-frame-wrap {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .video-frame {
+      display: block;
+      width: 100%;
+      height: min(52vw, 430px);
+      min-height: 290px;
+      object-fit: cover;
+      background: linear-gradient(0deg, rgba(26, 19, 17, .22), rgba(26, 19, 17, .22)), url("https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=85") center/cover;
+    }
+    .staff-section { background: var(--paper); }
+    .staff-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+    .staff-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--white);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .staff-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .staff-image { width: 100%; height: 225px; object-fit: cover; background: var(--gold-light); }
+    .staff-content { padding: 24px; }
+    .staff-tag {
+      color: #8a641c;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .staff-content h3 { margin: 8px 0 9px; color: var(--burgundy); font: 600 1.45rem/1.2 var(--serif); }
+    .staff-content p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .reviews { background: #f2ede4; }
+    .reviews-panel {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      align-items: center;
+      gap: 50px;
+      padding: clamp(30px, 6vw, 64px);
+      border: 1px solid #e4d8c6;
+      background: var(--white);
+      box-shadow: 0 10px 30px rgba(37, 22, 16, .04);
+    }
+    .rating-block { text-align: center; }
+    .rating-number { display: block; color: var(--burgundy); font: 600 clamp(4rem, 8vw, 6.5rem)/1 var(--serif); }
+    .rating-stars { margin: 13px 0 5px; color: #b98522; font-size: 1.35rem; letter-spacing: .15em; }
+    .rating-caption { color: var(--muted); font-size: .87rem; }
+    .reviews-copy h3 { margin: 0 0 12px; color: var(--burgundy); font: 600 1.8rem/1.2 var(--serif); }
+    .reviews-copy p { margin: 0 0 20px; color: var(--muted); }
+    .button-burgundy { background: var(--burgundy); color: var(--white); }
+    .button-burgundy:hover { background: var(--burgundy-dark); }
+    .rewards { background: var(--white); }
+    .rewards-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--gold-light);
+    }
+    .rewards-copy { padding: clamp(32px, 6vw, 72px); }
+    .rewards-copy h2 { margin: 0 0 16px; color: var(--burgundy); font: 600 clamp(2.2rem, 4vw, 3.4rem)/1.1 var(--serif); }
+    .rewards-copy > p:not(.eyebrow) { margin: 0 0 26px; color: #655b4e; }
+    .reward-list { display: grid; gap: 14px; margin: 0 0 28px; padding: 0; list-style: none; }
+    .reward-list li { display: flex; align-items: flex-start; gap: 11px; color: #3f3932; }
+    .reward-list li::before { color: #916b25; content: "✦"; }
+    .rewards-image {
+      min-height: 450px;
+      align-self: stretch;
+      background: linear-gradient(0deg, rgba(35, 18, 12, .12), rgba(35, 18, 12, .02)), url("https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1100&q=85") center / cover;
+    }
+    .contact { background: #211b19; color: var(--white); }
+    .contact .section-heading h2 { color: var(--white); }
+    .contact .section-heading p:last-child { color: #c9c0b9; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .contact-info h3 { margin: 0 0 20px; color: #e8cc8d; font: 600 1.7rem var(--serif); }
+    .contact-detail { display: flex; gap: 14px; margin: 0 0 20px; color: #e2dcd6; }
+    .contact-icon { width: 24px; flex: 0 0 24px; color: #e8cc8d; text-align: center; }
+    .contact-detail a { color: inherit; text-decoration: none; }
+    .contact-detail a:hover { color: #e8cc8d; text-decoration: underline; }
+    .hours {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 9px 20px;
+      max-width: 440px;
+      margin: 29px 0 0;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, .18);
+      color: #ded7d1;
+      font-size: .9rem;
+    }
+    .hours dt { font-weight: 600; }
+    .hours dd { margin: 0; text-align: right; }
+    .map-frame {
+      width: 100%;
+      min-height: 420px;
+      border: 0;
+      border-radius: 4px;
+      background: #e7e1d8;
+    }
+    .footer { padding: 30px 0; background: #15110f; color: #c9c0b9; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-brand { color: var(--white); font: 600 1.1rem var(--serif); }
+    .footer p { margin: 5px 0 0; font-size: .79rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .footer-links a { color: #e8cc8d; font-size: .83rem; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+    .age-gate {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow-y: auto;
+      padding: 22px;
+      background: rgba(14, 9, 8, .86);
+      backdrop-filter: blur(5px);
+    }
+    .age-gate[hidden] { display: none; }
+    .age-dialog {
+      width: min(100%, 510px);
+      padding: clamp(28px, 6vw, 48px);
+      border-top: 4px solid var(--gold);
+      border-radius: 4px;
+      background: var(--white);
+      text-align: center;
+      box-shadow: 0 22px 80px rgba(0, 0, 0, .35);
+    }
+    .age-mark { display: grid; width: 54px; height: 54px; margin: 0 auto 20px; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: var(--burgundy); font: 600 1.45rem var(--serif); }
+    .age-dialog h2 { margin: 0; color: var(--burgundy); font: 600 2rem/1.15 var(--serif); }
+    .age-dialog p { margin: 14px 0 24px; color: var(--muted); font-size: .92rem; }
+    .age-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .age-actions .button { min-width: 170px; cursor: pointer; }
+    .age-denied { display: none; margin-top: 18px; color: var(--burgundy); font-weight: 600; }
+    .age-dialog.denied .age-denied { display: block; }
+    @media (max-width: 900px) {
+      .nav-inner { min-height: 74px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .menu-toggle span, .menu-toggle::before, .menu-toggle::after {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: currentColor;
+        content: "";
+      }
+      .menu-toggle span { margin: 4px 0; }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 24px 20px;
+        border-top: 1px solid var(--line);
+        background: var(--white);
+        box-shadow: 0 12px 20px rgba(37, 22, 16, .08);
+      }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 12px 4px; }
+      .nav-links .nav-visit { margin-top: 8px; padding-inline: 14px; text-align: center; }
+      .weekly-inner { align-items: flex-start; flex-direction: column; gap: 22px; }
+      .rewards-panel { grid-template-columns: 1fr; }
+      .rewards-image { min-height: 310px; grid-row: 1; }
+      .contact-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .map-frame { min-height: 390px; }
+    }
+    @media (max-width: 640px) {
+      .container, .hero-content { width: min(100% - 36px, 1180px); }
+      .utility-bar { font-size: .72rem; }
+      .hero { min-height: 690px; min-height: min(760px, 82svh); background-position: 58% center; }
+      .hero-content { padding-block: 76px; }
+      .hero h1 { font-size: clamp(2.65rem, 12vw, 4.2rem); }
+      .hero-copy { max-width: 430px; font-size: 1rem; }
+      .button-row { align-items: stretch; flex-direction: column; max-width: 280px; }
+      .hero-note { align-items: flex-start; flex-direction: column; gap: 1px; }
+      .section { padding-block: 72px; }
+      .section-heading { margin-bottom: 32px; }
+      .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .category-card { min-height: 205px; }
+      .category-copy { padding: 15px; }
+      .category-copy h3 { font-size: 1.35rem; }
+      .category-copy span { font-size: .59rem; }
+      .staff-grid { grid-template-columns: 1fr; }
+      .staff-card { display: grid; grid-template-columns: 38% 1fr; }
+      .staff-image { height: 100%; min-height: 185px; }
+      .staff-content { align-self: center; padding: 18px; }
+      .staff-content h3 { font-size: 1.25rem; }
+      .reviews-panel { grid-template-columns: 1fr; gap: 30px; padding: 30px 24px; }
+      .reviews-copy { text-align: center; }
+      .rewards-copy { padding: 34px 25px; }
+      .rewards-image { min-height: 250px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .map-frame { min-height: 320px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 380px) {
+      .brand-name { font-size: .92rem; }
+      .brand-mark { width: 39px; height: 39px; }
+      .category-grid { grid-template-columns: 1fr; }
+      .category-card { min-height: 220px; }
+      .staff-card { grid-template-columns: 1fr; }
+      .staff-image { height: 195px; min-height: 0; }
+      .hours { gap: 8px 12px; font-size: .84rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="modal-open">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="age-gate" id="ageGate">
+    <div class="age-dialog" id="ageDialog" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageDescription">
+      <div class="age-mark" aria-hidden="true">J</div>
+      <p class="eyebrow">Jonna's Fine Wine &amp; Liquor</p>
+      <h2 id="ageTitle">Are you 21 or older?</h2>
+      <p id="ageDescription">You must be at least 21 years old to enter this website. Please enjoy responsibly.</p>
+      <div class="age-actions">
+        <button class="button button-burgundy" id="ageConfirm" type="button">Yes, I am 21+</button>
+        <button class="button" id="ageDecline" type="button" style="border-color: var(--line); color: var(--ink);">No, I'm under 21</button>
+      </div>
+      <p class="age-denied" id="ageDenied" role="status" tabindex="-1">We're sorry, but you must be 21 or older to visit this website.</p>
+    </div>
+  </div>
+
+  <div class="utility-bar">
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=Jonna%27s+Fine+Wine+%26+Liquor%2C+24225+Halsted+Rd%2C+Farmington+Hills%2C+MI+48335" target="_blank" rel="noopener noreferrer">Rated 4.6 ★ on Google · 221+ reviews</a>
+    <span aria-hidden="true"> &nbsp; | &nbsp; </span>
+    24225 Halsted Rd, Farmington Hills
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Jonna's Fine Wine & Liquor home">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span class="brand-name">Jonna's Fine Wine &amp; Liquor<span class="brand-caption">Farmington Hills, Michigan</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primaryNav">
+        <span aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="primaryNav" aria-label="Main navigation">
+        <a href="#categories">Shop</a>
+        <a href="#staff">Staff Picks</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#rewards">Rewards</a>
+        <a class="nav-visit" href="#contact">Visit Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="heroTitle">
+      <div class="hero-content">
+        <p class="eyebrow">Good taste starts here</p>
+        <h1 id="heroTitle">Find something worth sharing.</h1>
+        <p class="hero-copy">Explore a thoughtfully chosen collection of wine, spirits, whiskey, and more at your neighborhood bottle shop in Farmington Hills.</p>
+        <div class="button-row">
+          <a class="button button-gold" href="#categories">Explore our selection</a>
+          <a class="button button-outline" href="#contact">Plan your visit</a>
+        </div>
+        <div class="hero-note"><strong aria-label="4.6 out of 5 stars">★★★★★</strong><span>4.6 stars from 221+ Google reviews</span></div>
+      </div>
+    </section>
+
+    <section class="section categories-section" id="categories" aria-labelledby="categoriesTitle">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">A bottle for every occasion</p>
+          <h2 id="categoriesTitle">Explore the collection</h2>
+          <p>From everyday favorites to something new, find your next pour across our favorite departments.</p>
+        </div>
+        <div class="category-grid">
+          <a class="category-card" href="#contact" style="--card-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80')"><span class="category-copy"><span>Old world to new</span><h3>Wine</h3></span></a>
+          <a class="category-card" href="#contact" style="--card-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80')"><span class="category-copy"><span>Discover your next pour</span><h3>Spirits</h3></span></a>
+          <a class="category-card" href="#contact" style="--card-image: url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=900&q=80')"><span class="category-copy"><span>Made for slow evenings</span><h3>Whiskey</h3></span></a>
+          <a class="category-card" href="#contact" style="--card-image: url('https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=900&q=80')"><span class="category-copy"><span>American tradition</span><h3>Bourbon</h3></span></a>
+          <a class="category-card" href="#contact" style="--card-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80')"><span class="category-copy"><span>Brighten the occasion</span><h3>Tequila</h3></span></a>
+          <a class="category-card" href="#contact" style="--card-image: url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=900&q=80')"><span class="category-copy"><span>Local and loved</span><h3>Beer</h3></span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="weekly" aria-labelledby="weeklyTitle">
+      <div class="container weekly-inner">
+        <div>
+          <p class="eyebrow">Fresh finds, every week</p>
+          <h2 id="weeklyTitle">A good time to discover something new.</h2>
+          <p>Stop in to explore this week's specials, seasonal favorites, and new arrivals. Our team is happy to help you find the right bottle.</p>
+        </div>
+        <a class="button button-gold" href="tel:+12484775711">Call for this week's picks</a>
+      </div>
+    </section>
+
+    <section class="section video-section" aria-labelledby="videoTitle">
+      <div class="container">
+        <div class="video-panel">
+          <div class="video-copy">
+            <p class="eyebrow">From our shelves to your table</p>
+            <h2 id="videoTitle">See the atmosphere that keeps people coming back.</h2>
+            <p>Take a quick look inside Jonna's and get a feel for the friendly neighborhood vibe, curated favorites, and lively energy our customers love.</p>
+          </div>
+          <div class="video-frame-wrap">
+            <video class="video-frame" controls playsinline preload="metadata" poster="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=85" aria-label="Short video tour of Jonna's Fine Wine &amp; Liquor">
+              <source src="https://player.vimeo.com/external/449311489.sd.mp4?s=dd6d7b8a4b4b0d5f1b1b7bc26d763e8c2d3d91e0&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section staff-section" id="staff" aria-labelledby="staffTitle">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Chosen by our team</p>
+          <h2 id="staffTitle">Staff picks</h2>
+          <p>A few familiar favorites our team loves to recommend.</p>
+        </div>
+        <div class="staff-grid">
+          <article class="staff-card">
+            <img class="staff-image" src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=900&q=80" alt="A glass of red wine ready to enjoy" loading="lazy">
+            <div class="staff-content"><span class="staff-tag">A whiskey favorite</span><h3>Buffalo Trace Bourbon</h3><p>Easygoing caramel and vanilla notes make this a versatile choice for sipping or mixing.</p></div>
+          </article>
+          <article class="staff-card">
+            <img class="staff-image" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80" alt="Wine bottles displayed in a cellar" loading="lazy">
+            <div class="staff-content"><span class="staff-tag">For the dinner table</span><h3>Caymus Cabernet</h3><p>A full-bodied Cabernet with rich fruit character, well suited to a special meal.</p></div>
+          </article>
+          <article class="staff-card">
+            <img class="staff-image" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80" alt="A colorful cocktail with citrus garnish" loading="lazy">
+            <div class="staff-content"><span class="staff-tag">A versatile pour</span><h3>Don Julio Reposado</h3><p>A smooth tequila to enjoy neat or as the base for a favorite cocktail.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews" id="reviews" aria-labelledby="reviewsTitle">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Good company, good taste</p>
+          <h2 id="reviewsTitle">A neighborhood favorite</h2>
+          <p>We're grateful to be part of the Farmington Hills community.</p>
+        </div>
+        <div class="reviews-panel">
+          <div class="rating-block">
+            <span class="rating-number">4.6</span>
+            <div class="rating-stars" aria-label="Rated 4.6 out of 5 stars">★★★★★</div>
+            <span class="rating-caption">221+ Google reviews</span>
+          </div>
+          <div class="reviews-copy">
+            <h3>See what our customers are saying.</h3>
+            <p>Read the latest reviews and share your experience with Jonna's Fine Wine &amp; Liquor on Google.</p>
+            <a class="button button-burgundy" href="https://www.google.com/maps/search/?api=1&amp;query=Jonna%27s+Fine+Wine+%26+Liquor%2C+24225+Halsted+Rd%2C+Farmington+Hills%2C+MI+48335" target="_blank" rel="noopener noreferrer">Read Google reviews</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rewards" id="rewards" aria-labelledby="rewardsTitle">
+      <div class="container">
+        <div class="rewards-panel">
+          <div class="rewards-copy">
+            <p class="eyebrow">A little more to celebrate</p>
+            <h2 id="rewardsTitle">Make every visit count.</h2>
+            <p>Ask our team about Jonna's rewards and ways to enjoy being a regular.</p>
+            <ul class="reward-list">
+              <li>Earn points on eligible purchases</li>
+              <li>Celebrate your birthday with member offers</li>
+              <li>Hear about special and limited releases</li>
+            </ul>
+            <a class="button button-burgundy" href="tel:+12484775711">Ask us about rewards</a>
+          </div>
+          <div class="rewards-image" role="img" aria-label="Wine glasses set out for a celebration"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contactTitle">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">We look forward to seeing you</p>
+          <h2 id="contactTitle">Come by and say hello.</h2>
+          <p>Stop in to browse, ask a question, or find something special.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Visit Jonna's</h3>
+            <p class="contact-detail"><span class="contact-icon" aria-hidden="true">⌖</span><span>24225 Halsted Rd<br>Farmington Hills, MI 48335</span></p>
+            <p class="contact-detail"><span class="contact-icon" aria-hidden="true">☎</span><a href="tel:+12484775711">(248) 477-5711</a></p>
+            <h3 style="margin-top: 32px;">Store hours</h3>
+            <dl class="hours">
+              <dt>Monday</dt><dd>10:00 AM – 10:00 PM</dd>
+              <dt>Tuesday</dt><dd>10:00 AM – 10:00 PM</dd>
+              <dt>Wednesday</dt><dd>10:00 AM – 10:00 PM</dd>
+              <dt>Thursday</dt><dd>10:00 AM – 10:00 PM</dd>
+              <dt>Friday</dt><dd>10:00 AM – 11:00 PM</dd>
+              <dt>Saturday</dt><dd>10:00 AM – 11:00 PM</dd>
+              <dt>Sunday</dt><dd>11:00 AM – 10:00 PM</dd>
+            </dl>
+          </div>
+          <iframe
+            class="map-frame"
+            title="Map showing Jonna's Fine Wine & Liquor in Farmington Hills, Michigan"
+            src="https://maps.google.com/maps?q=24225%20Halsted%20Rd%2C%20Farmington%20Hills%2C%20MI%2048335&amp;z=15&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Jonna's Fine Wine &amp; Liquor</div>
+        <p>24225 Halsted Rd, Farmington Hills, MI 48335 · <a href="tel:+12484775711" style="color: inherit;">(248) 477-5711</a></p>
+        <p>&copy; <span id="currentYear">2026</span> Jonna's Fine Wine &amp; Liquor. Please enjoy responsibly.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#categories">Shop</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact &amp; hours</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var ageGate = document.getElementById("ageGate");
+      var ageDialog = document.getElementById("ageDialog");
+      var ageConfirm = document.getElementById("ageConfirm");
+      var ageDecline = document.getElementById("ageDecline");
+      var menuToggle = document.getElementById("menuToggle");
+      var primaryNav = document.getElementById("primaryNav");
+
+      function closeMenu() {
+        primaryNav.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      }
+
+      ageConfirm.addEventListener("click", function () {
+        ageGate.hidden = true;
+        document.body.classList.remove("modal-open");
+        document.getElementById("main").setAttribute("tabindex", "-1");
+        document.getElementById("main").focus();
+      });
+
+      ageDecline.addEventListener("click", function () {
+        ageDialog.classList.add("denied");
+        ageConfirm.disabled = true;
+        ageDecline.disabled = true;
+        document.getElementById("ageDenied").focus();
+      });
+
+      menuToggle.addEventListener("click", function () {
+        var isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+        primaryNav.classList.toggle("is-open", !isOpen);
+      });
+
+      primaryNav.addEventListener("click", function (event) {
+        if (event.target.closest("a")) closeMenu();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!ageGate.hidden && event.key === "Tab") {
+          var focusable = ageDialog.querySelectorAll("button:not([disabled])");
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+
+          if (!first) {
+            event.preventDefault();
+            document.getElementById("ageDenied").focus();
+          } else if (!ageDialog.contains(document.activeElement)) {
+            event.preventDefault();
+            (event.shiftKey ? last : first).focus();
+          } else if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+          return;
+        }
+
+        if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+          closeMenu();
+          menuToggle.focus();
+        }
+      });
+
+      document.getElementById("currentYear").textContent = String(new Date().getFullYear());
+      ageConfirm.focus();
+    }());
+  </script>
+</body>
+</html>
